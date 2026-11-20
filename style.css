@@ -1,0 +1,76 @@
+
+/* General page styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f5e9;
+    color: #1b4332;
+    min-height: 100vh;
+}
+
+/* Main game container */
+.game-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Game header */
+.game-header {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #2d6a4f;
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+/* Main game title */
+.game-header h1 {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+/* Game subtitle */
+.game-header p {
+    font-size: 20px;
+}
+
+/* Main screen */
+.main-screen {
+    background-color: white;
+    padding: 60px 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Main screen heading */
+.main-screen h2 {
+    font-size: 28px;
+    color: #2d6a4f;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+
+    .game-header h1 {
+        font-size: 36px;
+    }
+
+    .game-header p {
+        font-size: 16px;
+    }
+
+    .main-screen h2 {
+        font-size: 22px;
+    }
+
+}
