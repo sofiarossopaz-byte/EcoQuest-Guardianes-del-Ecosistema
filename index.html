@@ -6,37 +6,269 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="EcoQuest: Guardians of the Ecosystem - An educational game about ecosystems and food chains.">
+    <meta name="description" content="EcoQuest - An educational adventure to discover and protect ecosystems.">
 
-    <title>EcoQuest: Guardians of the Ecosystem</title>
+    <title>EcoQuest - Guardians of the Ecosystem</title>
 
-    <!-- Connect CSS stylesheet -->
-    <link rel="stylesheet" href="css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Connect JavaScript file -->
-    <script src="js/actions.js" defer></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- JavaScript -->
+    <script src="actions.js" defer></script>
 </head>
 
 <body>
 
-    <!-- Main game container -->
-    <main class="game-container">
+    <div class="page-container">
 
-        <!-- Game title -->
-        <header class="game-header">
-            <h1>EcoQuest</h1>
-            <p>Guardians of the Ecosystem</p>
+        <!-- HEADER -->
+        <header class="top-header">
+
+            <a href="#" class="logo">
+                <span class="logo-icon">🌿</span>
+                <span>Eco<span class="logo-highlight">Quest</span></span>
+            </a>
+
+            <div class="header-label">
+                <span class="online-dot"></span>
+                ECO ADVENTURE
+            </div>
+
         </header>
 
-        <!-- Main screen -->
-        <section class="main-screen">
 
-            <h2>Welcome to EcoQuest!</h2>
+        <!-- HERO / WELCOME SECTION -->
+        <main>
 
-        </section>
+            <section class="hero-section">
 
-    </main>
+                <div class="hero-content">
+
+                    <div class="welcome-tag">
+                        🌎 YOUR PLANET NEEDS YOU!
+                    </div>
+
+                    <h1>
+                        Become a
+                        <span>Guardian</span>
+                        of the Ecosystem!
+                    </h1>
+
+                    <p class="hero-description">
+                        Explore amazing ecosystems, discover the secrets
+                        of food chains and save nature one mission at a time!
+                    </p>
+
+                    <button class="start-button" type="button">
+                        <span>Start Game</span>
+                        <span class="button-arrow">➜</span>
+                    </button>
+
+                    <div class="hero-note">
+                        ⭐ Learn • Explore • Protect
+                    </div>
+
+                </div>
+
+                <div class="hero-art">
+
+                    <div class="sun"></div>
+
+                    <div class="floating-leaf leaf-one">🍃</div>
+                    <div class="floating-leaf leaf-two">🌿</div>
+
+                    <div class="hero-illustration">
+                        <span class="animal animal-one">🦊</span>
+                        <span class="animal animal-two">🦋</span>
+                        <span class="animal animal-three">🐸</span>
+                        <span class="animal animal-four">🌳</span>
+                    </div>
+
+                    <div class="art-caption">
+                        <span>🌱</span>
+                        Every action matters!
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- GAME STATUS -->
+            <section class="game-status">
+
+                <div class="status-card">
+
+                    <div class="status-icon score-icon">🏆</div>
+
+                    <div class="status-info">
+                        <span class="status-label">YOUR SCORE</span>
+                        <strong>0 <small>PTS</small></strong>
+                    </div>
+
+                </div>
+
+                <div class="status-card">
+
+                    <div class="status-icon lives-icon">❤️</div>
+
+                    <div class="status-info">
+                        <span class="status-label">YOUR LIVES</span>
+                        <strong>❤️ ❤️ ❤️</strong>
+                    </div>
+
+                </div>
+
+                <div class="status-card">
+
+                    <div class="status-icon level-icon">⭐</div>
+
+                    <div class="status-info">
+                        <span class="status-label">YOUR LEVEL</span>
+                        <strong>Level 1</strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- MISSIONS SECTION -->
+            <section class="missions-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-eyebrow">YOUR ADVENTURE STARTS HERE</span>
+                        <h2>Choose Your Mission</h2>
+                        <p>Complete all three missions to become a true Eco Guardian!</p>
+                    </div>
+
+                    <div class="mission-count">
+                        03 <span>MISSIONS</span>
+                    </div>
+
+                </div>
+
+
+                <div class="missions-grid">
+
+                    <!-- MISSION 1 -->
+                    <article class="mission-card mission-green">
+
+                        <div class="mission-top">
+                            <span class="mission-number">MISSION 01</span>
+                            <span class="mission-emoji">🌳</span>
+                        </div>
+
+                        <div class="mission-art">
+                            🌱 🐰 🍄
+                        </div>
+
+                        <h3>Identify the Organisms</h3>
+
+                        <p>
+                            Discover producers, consumers and decomposers
+                            in the ecosystem.
+                        </p>
+
+                        <div class="mission-footer">
+                            <span>🧠 Classification</span>
+                            <span class="mission-arrow">➜</span>
+                        </div>
+
+                    </article>
+
+
+                    <!-- MISSION 2 -->
+                    <article class="mission-card mission-yellow">
+
+                        <div class="mission-top">
+                            <span class="mission-number">MISSION 02</span>
+                            <span class="mission-emoji">🔗</span>
+                        </div>
+
+                        <div class="mission-art">
+                            🌿 🐛 🐦
+                        </div>
+
+                        <h3>Build the Food Chain</h3>
+
+                        <p>
+                            Connect organisms and discover how energy
+                            flows through nature.
+                        </p>
+
+                        <div class="mission-footer">
+                            <span>🔬 Food Chains</span>
+                            <span class="mission-arrow">➜</span>
+                        </div>
+
+                    </article>
+
+
+                    <!-- MISSION 3 -->
+                    <article class="mission-card mission-blue">
+
+                        <div class="mission-top">
+                            <span class="mission-number">MISSION 03</span>
+                            <span class="mission-emoji">🌍</span>
+                        </div>
+
+                        <div class="mission-art">
+                            🦊 🌲 🦋
+                        </div>
+
+                        <h3>Save the Ecosystem</h3>
+
+                        <p>
+                            Solve ecological challenges and restore
+                            nature's balance.
+                        </p>
+
+                        <div class="mission-footer">
+                            <span>🌎 Ecology</span>
+                            <span class="mission-arrow">➜</span>
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </section>
+
+
+            <!-- MOTIVATIONAL BANNER -->
+            <section class="motivational-banner">
+
+                <div class="banner-icon">🌎</div>
+
+                <div class="banner-text">
+                    <h3>Be the change. Protect our planet!</h3>
+                    <p>Small actions can make a big difference.</p>
+                </div>
+
+                <span class="banner-decoration">🌿</span>
+
+            </section>
+
+        </main>
+
+
+        <!-- FOOTER -->
+        <footer class="footer">
+
+            <p>🌱 EcoQuest: Guardians of the Ecosystem</p>
+            <span>Educational Game • Science • Middle School</span>
+
+        </footer>
+
+    </div>
 
 </body>
-
 </html>
