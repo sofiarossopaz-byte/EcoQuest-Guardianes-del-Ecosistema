@@ -18,7 +18,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 
-    <!-- JavaScript -->
+    <!-- Game state must load before actions.js -->
+    <script src="gameState.js" defer></script>
     <script src="actions.js" defer></script>
 </head>
 
@@ -42,9 +43,9 @@
         </header>
 
 
-        <!-- HERO / WELCOME SECTION -->
         <main>
 
+            <!-- HERO SECTION -->
             <section class="hero-section">
 
                 <div class="hero-content">
@@ -64,12 +65,18 @@
                         of food chains and save nature one mission at a time!
                     </p>
 
-                    <button class="start-button" type="button">
+                    <button class="start-button" id="start-button" type="button">
                         <span>Start Game</span>
                         <span class="button-arrow">➜</span>
                     </button>
 
-                    <div class="hero-note">
+                    <button class="start-button" id="restart-button"
+                        type="button" style="display: none;">
+                        <span>Restart Game</span>
+                        <span class="button-arrow">↻</span>
+                    </button>
+
+                    <div class="hero-note" id="game-message">
                         ⭐ Learn • Explore • Protect
                     </div>
 
@@ -102,35 +109,41 @@
             <!-- GAME STATUS -->
             <section class="game-status">
 
+                <!-- SCORE -->
                 <div class="status-card">
 
                     <div class="status-icon score-icon">🏆</div>
 
                     <div class="status-info">
                         <span class="status-label">YOUR SCORE</span>
-                        <strong>0 <small>PTS</small></strong>
+                        <strong>
+                            <span id="score-value">0</span>
+                            <small>PTS</small>
+                        </strong>
                     </div>
 
                 </div>
 
+                <!-- LIVES -->
                 <div class="status-card">
 
                     <div class="status-icon lives-icon">❤️</div>
 
                     <div class="status-info">
                         <span class="status-label">YOUR LIVES</span>
-                        <strong>❤️ ❤️ ❤️</strong>
+                        <strong id="lives-value">❤️ ❤️ ❤️</strong>
                     </div>
 
                 </div>
 
+                <!-- LEVEL -->
                 <div class="status-card">
 
                     <div class="status-icon level-icon">⭐</div>
 
                     <div class="status-info">
                         <span class="status-label">YOUR LEVEL</span>
-                        <strong>Level 1</strong>
+                        <strong id="level-value">Level 1</strong>
                     </div>
 
                 </div>
@@ -138,7 +151,7 @@
             </section>
 
 
-            <!-- MISSIONS SECTION -->
+            <!-- MISSIONS -->
             <section class="missions-section">
 
                 <div class="section-heading">
@@ -150,7 +163,8 @@
                     </div>
 
                     <div class="mission-count">
-                        03 <span>MISSIONS</span>
+                        <span id="mission-count">0/3</span>
+                        <span>COMPLETED</span>
                     </div>
 
                 </div>
@@ -159,7 +173,7 @@
                 <div class="missions-grid">
 
                     <!-- MISSION 1 -->
-                    <article class="mission-card mission-green">
+                    <article class="mission-card mission-green" id="mission-1">
 
                         <div class="mission-top">
                             <span class="mission-number">MISSION 01</span>
@@ -179,14 +193,14 @@
 
                         <div class="mission-footer">
                             <span>🧠 Classification</span>
-                            <span class="mission-arrow">➜</span>
+                            <span class="mission-arrow" id="mission-1-status">➜</span>
                         </div>
 
                     </article>
 
 
                     <!-- MISSION 2 -->
-                    <article class="mission-card mission-yellow">
+                    <article class="mission-card mission-yellow" id="mission-2">
 
                         <div class="mission-top">
                             <span class="mission-number">MISSION 02</span>
@@ -206,14 +220,14 @@
 
                         <div class="mission-footer">
                             <span>🔬 Food Chains</span>
-                            <span class="mission-arrow">➜</span>
+                            <span class="mission-arrow" id="mission-2-status">🔒</span>
                         </div>
 
                     </article>
 
 
                     <!-- MISSION 3 -->
-                    <article class="mission-card mission-blue">
+                    <article class="mission-card mission-blue" id="mission-3">
 
                         <div class="mission-top">
                             <span class="mission-number">MISSION 03</span>
@@ -233,7 +247,7 @@
 
                         <div class="mission-footer">
                             <span>🌎 Ecology</span>
-                            <span class="mission-arrow">➜</span>
+                            <span class="mission-arrow" id="mission-3-status">🔒</span>
                         </div>
 
                     </article>
