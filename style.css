@@ -1,9 +1,7 @@
 
 /* =========================================
-   ECOQUEST - GAME INTERFACE
-   ========================================= */
-
-/* COLOR PALETTE */
+   ECOQUEST - MAIN STYLES
+========================================= */
 
 :root {
     --forest: #174B35;
@@ -15,412 +13,226 @@
     --text: #263D30;
     --muted: #718174;
     --white: #FFFFFF;
+    --red: #C94C4C;
 }
 
-
-/* GENERAL RESET */
-
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Nunito', Arial, sans-serif;
-    background-color: var(--cream);
+    font-family: "Nunito", Arial, sans-serif;
+    background: var(--cream);
     color: var(--text);
     min-height: 100vh;
 }
 
 button {
-    font-family: inherit;
+    font: inherit;
     cursor: pointer;
+    border: none;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+}
+
+[hidden] {
+    display: none !important;
 }
 
 .page-container {
-    width: 100%;
-    max-width: 1250px;
+    width: min(1150px, 92%);
     margin: auto;
-    padding: 0 35px;
 }
 
-
-/* =========================================
-   HEADER
-   ========================================= */
+/* HEADER */
 
 .top-header {
-    height: 85px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #E3E8DB;
+    align-items: center;
+    padding: 24px 0;
 }
 
 .logo {
     display: flex;
     align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--forest);
-    font-size: 27px;
-    font-weight: 900;
+    gap: 12px;
 }
 
 .logo-icon {
-    font-size: 30px;
+    font-size: 2.5rem;
 }
 
-.logo-highlight {
-    color: var(--green);
-}
-
-.header-label {
-    background-color: var(--light-green);
+.logo h2 {
     color: var(--forest);
-    padding: 9px 17px;
+    font-size: 1.5rem;
+}
+
+.logo p {
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.restart-button {
+    background: var(--light-green);
+    color: var(--forest);
+    padding: 11px 20px;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+/* BUTTONS */
+
+.primary-button,
+.secondary-button {
+    padding: 14px 26px;
     border-radius: 30px;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1px;
+    font-weight: 800;
+    margin-top: 18px;
+    transition: 0.2s;
 }
 
-.online-dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-color: #65B84D;
-    border-radius: 50%;
-    margin-right: 6px;
+.primary-button {
+    background: var(--green);
+    color: var(--white);
 }
 
+.primary-button:hover {
+    background: var(--forest);
+    transform: translateY(-2px);
+}
 
-/* =========================================
-   HERO SECTION
-   ========================================= */
+.secondary-button {
+    background: var(--light-green);
+    color: var(--forest);
+    margin-left: 8px;
+}
+
+.back-button {
+    background: transparent;
+    color: var(--forest);
+    font-weight: bold;
+    padding: 12px 0;
+    margin: 12px 0;
+}
+
+/* WELCOME SCREEN */
 
 .hero-section {
-    background: linear-gradient(
-        120deg,
-        #174B35,
-        #286D48
-    );
-
-    min-height: 370px;
-    margin-top: 35px;
-    border-radius: 25px;
-    padding: 45px 55px;
-
+    background: var(--forest);
+    color: var(--white);
+    border-radius: 28px;
+    padding: 55px;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-
-    position: relative;
-    overflow: hidden;
-    color: white;
+    align-items: center;
+    gap: 30px;
+    min-height: 340px;
 }
 
 .hero-content {
-    width: 55%;
-    position: relative;
-    z-index: 2;
+    max-width: 600px;
 }
 
-.welcome-tag {
+.welcome-tag,
+.section-tag {
     display: inline-block;
-    background-color: rgba(255, 255, 255, 0.15);
-    padding: 8px 14px;
-    border-radius: 30px;
-    font-size: 11px;
-    font-weight: 900;
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 0.8rem;
     letter-spacing: 1px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .hero-content h1 {
-    font-size: clamp(34px, 4vw, 51px);
-    line-height: 1.13;
-    font-weight: 900;
-    max-width: 550px;
+    font-size: clamp(2rem, 5vw, 3.3rem);
+    line-height: 1.15;
+    margin-bottom: 18px;
 }
 
-.hero-content h1 span {
-    color: #B8E986;
-}
-
-.hero-description {
-    color: #D9EBDD;
-    font-size: 15px;
+.hero-content p {
+    color: #E1EBDD;
     line-height: 1.7;
-    max-width: 460px;
-    margin-top: 17px;
-}
-
-.start-button {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-
-    background-color: var(--gold);
-    color: #263D30;
-
-    border: none;
-    border-radius: 12px;
-
-    padding: 15px 24px;
-    margin-top: 25px;
-
-    font-size: 16px;
-    font-weight: 900;
-
-    box-shadow: 0 5px 0 #B87929;
-    transition: transform 0.2s, background-color 0.2s;
-}
-
-.start-button:hover {
-    background-color: #F3BC68;
-    transform: translateY(-3px);
-}
-
-.button-arrow {
-    font-size: 20px;
-}
-
-.hero-note {
-    margin-top: 22px;
-    font-size: 12px;
-    color: #D9EBDD;
-    font-weight: 700;
-}
-
-
-/* HERO ILLUSTRATION */
-
-.hero-art {
-    width: 40%;
-    min-height: 270px;
-    position: relative;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.sun {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: #F3BD65;
-    top: 10px;
-    right: 40px;
-    opacity: 0.95;
 }
 
 .hero-illustration {
-    position: relative;
-    z-index: 2;
-
-    width: 270px;
-    height: 220px;
-
-    border-radius: 50%;
-    background: linear-gradient(
-        145deg,
-        #A7D77C,
-        #5EAC5A
-    );
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 5px;
-
-    border: 8px solid rgba(255,255,255,0.2);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    font-size: 4rem;
 }
 
-.animal {
-    font-size: 65px;
-    filter: drop-shadow(0 5px 3px rgba(0,0,0,0.12));
+.hero-illustration span {
+    background: #FFFFFF20;
+    padding: 15px;
+    border-radius: 20px;
 }
 
-.animal-one {
-    transform: rotate(-8deg);
-}
-
-.animal-two {
-    font-size: 42px;
-}
-
-.animal-three {
-    font-size: 48px;
-}
-
-.animal-four {
-    font-size: 55px;
-}
-
-.floating-leaf {
-    position: absolute;
-    z-index: 3;
-    font-size: 35px;
-}
-
-.leaf-one {
-    top: 10px;
-    left: 5px;
-    transform: rotate(-25deg);
-}
-
-.leaf-two {
-    bottom: 25px;
-    right: 0;
-    transform: rotate(20deg);
-}
-
-.art-caption {
-    position: absolute;
-    bottom: 0;
-    right: 15px;
-
-    background-color: white;
-    color: var(--forest);
-
-    border-radius: 30px;
-    padding: 10px 16px;
-
-    font-size: 12px;
-    font-weight: 900;
-    z-index: 4;
-
-    box-shadow: 0 5px 15px rgba(0,0,0,0.12);
-}
-
-
-/* =========================================
-   GAME STATUS
-   ========================================= */
+/* GAME STATUS */
 
 .game-status {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
-    margin-top: 28px;
+    margin: 28px 0;
 }
 
 .status-card {
-    background-color: white;
-    border: 1px solid #E7EBDD;
-    border-radius: 16px;
-    padding: 18px 22px;
-
-    display: flex;
-    align-items: center;
-    gap: 15px;
-
-    box-shadow: 0 4px 12px rgba(35, 70, 40, 0.04);
+    background: var(--white);
+    padding: 20px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 5px 18px #174B3510;
 }
 
-.status-icon {
-    width: 48px;
-    height: 48px;
-    border-radius: 13px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 23px;
-}
-
-.score-icon {
-    background-color: #FFF1D9;
-}
-
-.lives-icon {
-    background-color: #FFE8E8;
-}
-
-.level-icon {
-    background-color: #E9EEFF;
-}
-
-.status-info {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.status-label {
+.status-card span,
+.status-card small {
+    display: block;
     color: var(--muted);
-    font-size: 10px;
-    font-weight: 900;
-    letter-spacing: 1px;
 }
 
-.status-info strong {
-    font-size: 19px;
+.status-card strong {
+    display: block;
     color: var(--forest);
-    font-weight: 900;
+    font-size: 1.5rem;
+    margin: 8px 0;
 }
 
-.status-info strong small {
-    font-size: 11px;
+/* GAME MESSAGE */
+
+.game-message {
+    text-align: center;
+    color: var(--forest);
+    font-weight: bold;
+    margin: 15px 0;
 }
 
-
-/* =========================================
-   MISSIONS
-   ========================================= */
+/* MISSIONS */
 
 .missions-section {
-    margin-top: 55px;
+    padding: 35px 0;
 }
 
 .section-heading {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 25px;
-}
-
-.section-eyebrow {
-    color: #79A65B;
-    font-size: 11px;
-    font-weight: 900;
-    letter-spacing: 1.5px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .section-heading h2 {
+    font-size: 2rem;
     color: var(--forest);
-    font-size: 32px;
-    font-weight: 900;
-    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .section-heading p {
     color: var(--muted);
-    font-size: 14px;
-    margin-top: 5px;
 }
-
-.mission-count {
-    font-size: 25px;
-    color: var(--forest);
-    font-weight: 900;
-}
-
-.mission-count span {
-    font-size: 10px;
-    color: var(--muted);
-    letter-spacing: 1px;
-}
-
-
-/* MISSION GRID */
 
 .missions-grid {
     display: grid;
@@ -428,324 +240,311 @@ button {
     gap: 20px;
 }
 
-
-/* MISSION CARD */
-
 .mission-card {
-    background-color: white;
-    border: 1px solid #E6EBDD;
-    border-radius: 18px;
-    padding: 22px;
-
-    transition: transform 0.25s, box-shadow 0.25s;
-
+    background: var(--white);
+    border: 2px solid transparent;
+    border-radius: 22px;
+    padding: 25px;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    transition: 0.2s;
 }
 
-.mission-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 25px rgba(35, 70, 40, 0.10);
+.mission-card.current {
+    border-color: var(--gold);
 }
 
-.mission-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.mission-card.completed {
+    border-color: var(--green);
+}
+
+.mission-card.locked {
+    opacity: 0.7;
+}
+
+.mission-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
 }
 
 .mission-number {
-    color: #789078;
-    font-size: 10px;
+    color: var(--green);
+    font-size: 0.75rem;
     font-weight: 900;
     letter-spacing: 1px;
 }
 
-.mission-emoji {
-    font-size: 24px;
-}
-
-.mission-art {
-    height: 125px;
-    border-radius: 13px;
-    margin-top: 20px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-
-    font-size: 39px;
-}
-
-.mission-green .mission-art {
-    background-color: #EAF4E3;
-}
-
-.mission-yellow .mission-art {
-    background-color: #FFF3DA;
-}
-
-.mission-blue .mission-art {
-    background-color: #E5F0F5;
-}
-
 .mission-card h3 {
     color: var(--forest);
-    font-size: 19px;
-    font-weight: 900;
-    margin-top: 20px;
+    margin: 10px 0;
 }
 
 .mission-card p {
     color: var(--muted);
-    font-size: 13px;
     line-height: 1.6;
-    margin-top: 9px;
+    margin-bottom: 18px;
     flex-grow: 1;
 }
 
-.mission-footer {
-    border-top: 1px solid #EEF0E9;
-    margin-top: 20px;
-    padding-top: 15px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    color: #71906B;
-    font-size: 12px;
-    font-weight: 900;
-}
-
-.mission-arrow {
-    width: 30px;
-    height: 30px;
-
-    border-radius: 50%;
-    background-color: var(--light-green);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.mission-status {
     color: var(--forest);
-    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-
-/* =========================================
-   MOTIVATIONAL BANNER
-   ========================================= */
-
-.motivational-banner {
-    margin-top: 35px;
-    background-color: #EAF1DF;
-    border-radius: 17px;
-    padding: 22px 28px;
-
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    position: relative;
-    overflow: hidden;
-}
-
-.banner-icon {
-    font-size: 38px;
-}
-
-.banner-text h3 {
+.mission-button {
+    width: 100%;
+    background: var(--light-green);
     color: var(--forest);
-    font-size: 17px;
-    font-weight: 900;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: 800;
 }
 
-.banner-text p {
-    color: var(--muted);
-    font-size: 13px;
-    margin-top: 3px;
+.mission-button:not(:disabled):hover {
+    background: var(--green);
+    color: var(--white);
 }
 
-.banner-decoration {
-    font-size: 55px;
-    margin-left: auto;
+/* CHALLENGE AREA */
+
+.challenge-screen {
+    padding: 15px 0 45px;
 }
 
-
-/* =========================================
-   FOOTER
-   ========================================= */
-
-.footer {
+.challenge-card {
+    background: var(--white);
+    max-width: 750px;
+    margin: 15px auto;
+    padding: 35px;
+    border-radius: 25px;
     text-align: center;
-    padding: 35px 10px;
-    margin-top: 20px;
-    border-top: 1px solid #E3E8DB;
+    box-shadow: 0 8px 25px #174B3510;
 }
 
-.footer p {
+.challenge-card h2 {
     color: var(--forest);
-    font-weight: 900;
-    font-size: 14px;
+    font-size: 2rem;
+    margin: 8px 0 15px;
 }
 
-.footer span {
-    display: block;
+.challenge-card h3 {
+    color: var(--forest);
+    font-size: 1.4rem;
+    margin: 12px 0;
+}
+
+.challenge-card h4 {
+    margin: 25px 0 15px;
+    color: var(--text);
+}
+
+.challenge-card p {
     color: var(--muted);
-    font-size: 11px;
-    margin-top: 5px;
+    line-height: 1.6;
 }
 
+.challenge-progress {
+    color: var(--muted);
+    font-weight: bold;
+    margin: 15px 0 25px;
+}
 
-/* =========================================
-   RESPONSIVE DESIGN
-   ========================================= */
+.organism-illustration,
+.scenario-illustration {
+    background: var(--light-green);
+    width: 125px;
+    height: 125px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: grid;
+    place-items: center;
+    font-size: 4.5rem;
+}
+
+/* ANSWER OPTIONS */
+
+.answer-options {
+    display: grid;
+    gap: 12px;
+    margin: 20px 0;
+}
+
+.answer-button {
+    background: var(--cream);
+    color: var(--forest);
+    border: 2px solid #E0E9DA;
+    border-radius: 14px;
+    padding: 15px;
+    font-weight: 800;
+    transition: 0.2s;
+}
+
+.answer-button:not(:disabled):hover {
+    background: var(--light-green);
+    border-color: var(--green);
+}
+
+.answer-button:disabled {
+    opacity: 0.7;
+}
+
+/* FEEDBACK */
+
+.answer-feedback {
+    padding: 15px;
+    border-radius: 12px;
+    margin: 18px 0;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.correct-feedback {
+    background: var(--light-green);
+    color: var(--forest);
+}
+
+.incorrect-feedback {
+    background: #FCE8E6;
+    color: #9E3030;
+}
+
+/* FOOD CHAIN */
+
+.food-chain-slots {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.chain-slot {
+    background: var(--light-green);
+    border: 2px dashed var(--green);
+    border-radius: 12px;
+    padding: 18px 8px;
+    color: var(--forest);
+    font-weight: 800;
+    min-height: 75px;
+    display: grid;
+    place-items: center;
+}
+
+.chain-placeholder {
+    background: var(--cream);
+    color: var(--muted);
+    border-radius: 12px;
+    padding: 18px 8px;
+    font-size: 0.9rem;
+}
+
+/* ECOSYSTEM SCENARIOS */
+
+.scenario-box {
+    background: var(--light-green);
+    border-left: 5px solid var(--green);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: left;
+    margin: 20px 0;
+}
+
+.scenario-box strong {
+    color: var(--forest);
+}
+
+.scenario-box p {
+    margin-top: 8px;
+}
+
+/* END SCREEN */
+
+.end-screen {
+    background: var(--white);
+    border-radius: 25px;
+    padding: 45px 25px;
+    text-align: center;
+    max-width: 650px;
+    margin: 35px auto;
+}
+
+.end-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+}
+
+.end-screen h2 {
+    color: var(--forest);
+    font-size: 2rem;
+}
+
+.end-screen p {
+    color: var(--muted);
+    margin-top: 12px;
+    line-height: 1.6;
+}
+
+.final-score strong {
+    color: var(--forest);
+    font-size: 1.5rem;
+}
+
+.mission-complete {
+    margin-top: 25px;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: var(--muted);
+    padding: 35px 0;
+    font-size: 0.9rem;
+}
+
+/* RESPONSIVE DESIGN */
 
 @media (max-width: 850px) {
+
+    .missions-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 
     .hero-section {
         padding: 35px;
     }
-
-    .hero-content {
-        width: 60%;
-    }
-
-    .hero-art {
-        width: 40%;
-    }
-
-    .hero-illustration {
-        width: 200px;
-        height: 180px;
-    }
-
-    .animal {
-        font-size: 48px;
-    }
-
-    .animal-two {
-        font-size: 35px;
-    }
-
-    .missions-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .mission-card:last-child {
-        grid-column: 1 / -1;
-    }
 }
-
 
 @media (max-width: 600px) {
 
-    .page-container {
-        padding: 0 16px;
-    }
-
-    .top-header {
-        height: 70px;
-    }
-
-    .logo {
-        font-size: 23px;
-    }
-
-    .header-label {
-        font-size: 9px;
-        padding: 8px 10px;
-    }
-
     .hero-section {
         flex-direction: column;
-        align-items: flex-start;
-        padding: 30px 22px;
-        margin-top: 20px;
-    }
-
-    .hero-content {
-        width: 100%;
-    }
-
-    .hero-content h1 {
-        font-size: 37px;
-    }
-
-    .hero-description {
-        font-size: 14px;
-    }
-
-    .hero-art {
-        width: 100%;
-        min-height: 230px;
-        margin-top: 25px;
+        text-align: center;
+        padding: 30px 20px;
     }
 
     .hero-illustration {
-        width: 220px;
-        height: 180px;
+        font-size: 2.5rem;
     }
 
     .game-status {
         grid-template-columns: 1fr;
-        gap: 10px;
-    }
-
-    .status-card {
-        padding: 13px 18px;
-    }
-
-    .missions-section {
-        margin-top: 40px;
-    }
-
-    .section-heading {
-        align-items: flex-start;
-    }
-
-    .section-heading h2 {
-        font-size: 26px;
-    }
-
-    .section-heading p {
-        max-width: 280px;
-    }
-
-    .mission-count {
-        display: none;
     }
 
     .missions-grid {
         grid-template-columns: 1fr;
     }
 
-    .mission-card:last-child {
-        grid-column: auto;
+    .challenge-card {
+        padding: 22px 15px;
     }
 
-    .motivational-banner {
-        padding: 18px;
-        gap: 12px;
+    .food-chain-slots {
+        grid-template-columns: 1fr;
     }
 
-    .banner-icon {
-        font-size: 30px;
+    .top-header {
+        gap: 10px;
     }
-
-    .banner-text h3 {
-        font-size: 14px;
-    }
-
-    .banner-text p {
-        font-size: 11px;
-    }
-
-    .banner-decoration {
-        display: none;
-    }
-
 }

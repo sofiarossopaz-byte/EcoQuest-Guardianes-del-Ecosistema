@@ -1,31 +1,34 @@
 
 /* =========================================
-   ECOQUEST - ACTIONS
-   Controla las interacciones y la interfaz
+   ECOQUEST - MAIN ACTIONS
 ========================================= */
 
-// =========================================
-// 1. SELECCIONAR ELEMENTOS HTML
-// =========================================
+// HTML elements
+const welcomeScreen = document.getElementById("welcome-screen");
+const gameStatus = document.getElementById("game-status");
+const missionsScreen = document.getElementById("missions-screen");
+const challengeScreen = document.getElementById("challenge-screen");
+const endScreen = document.getElementById("end-screen");
+
+const challengeContainer = document.getElementById("challenge-container");
 
 const startButton = document.getElementById("start-button");
 const restartButton = document.getElementById("restart-button");
+const backButton = document.getElementById("back-button");
+const playAgainButton = document.getElementById("play-again-button");
 
 const scoreValue = document.getElementById("score-value");
 const livesValue = document.getElementById("lives-value");
 const levelValue = document.getElementById("level-value");
 const missionCount = document.getElementById("mission-count");
-
 const gameMessage = document.getElementById("game-message");
 
-// Tarjetas de las misiones
 const missionCards = [
     document.getElementById("mission-1"),
     document.getElementById("mission-2"),
     document.getElementById("mission-3")
 ];
 
-// Indicadores de estado de las misiones
 const missionStatuses = [
     document.getElementById("mission-1-status"),
     document.getElementById("mission-2-status"),
@@ -34,85 +37,86 @@ const missionStatuses = [
 
 
 // =========================================
-// 2. ACTUALIZAR LA INTERFAZ
+// SCREEN NAVIGATION
+// =========================================
+
+function showScreen(screen) {
+
+    welcomeScreen.hidden = true;
+    missionsScreen.hidden = true;
+    challengeScreen.hidden = true;
+    endScreen.hidden = true;
+
+    screen.hidden = false;
+}
+
+
+// =========================================
+// UPDATE GAME STATUS
 // =========================================
 
 function updateGameInterface() {
 
-    // Actualizar puntuación
     scoreValue.textContent = GameState.score;
 
-    // Actualizar vidas
-    const hearts = "❤️ ".repeat(GameState.lives);
+    const fullHearts = "❤️ ".repeat(GameState.lives);
     const emptyHearts = "🖤 ".repeat(
         GameState.initialLives - GameState.lives
     );
 
-    livesValue.textContent = hearts + emptyHearts;
+    livesValue.textContent = fullHearts + emptyHearts;
 
-    // Actualizar nivel
     levelValue.textContent = GameState.getLevel();
 
-    // Actualizar progreso de misiones
     missionCount.textContent =
-        `${GameState.completedMissions.length}/${GameState.totalMissions}`;
+        `${GameState.completedMissions.length}/${GameState.totalMissions} missions`;
 
-    // Actualizar tarjetas de las misiones
     missionCards.forEach((card, index) => {
 
-        if (!card) return;
-
-        const missionNumber = index + 1;
+        const number = index + 1;
         const status = missionStatuses[index];
+        const button = card.querySelector(".mission-button");
 
-        card.style.border = "2px solid transparent";
+        card.classList.remove("completed", "current", "locked");
 
-        if (GameState.completedMissions.includes(missionNumber)) {
+        if (GameState.completedMissions.includes(number)) {
 
-            if (status) status.textContent = "✓ Completed";
-            card.style.border = "2px solid #72B95B";
+            status.textContent = "✓ Completed";
+            card.classList.add("completed");
 
-        } else if (
-            GameState.gameStarted &&
-            missionNumber === GameState.currentMission
-        ) {
+            button.textContent = "Completed";
+            button.disabled = true;
 
-            if (status) status.textContent = "➜ Current Mission";
-            card.style.border = "2px solid #E9A64C";
+        } else if (GameState.isMissionUnlocked(number)) {
+
+            status.textContent = "➜ Available";
+            card.classList.add("current");
+
+            button.textContent = "Start Mission";
+            button.disabled = false;
 
         } else {
 
-            if (status) status.textContent = "🔒 Locked";
+            status.textContent = "🔒 Locked";
+            card.classList.add("locked");
 
+            button.textContent = "Locked";
+            button.disabled = true;
         }
     });
 
-    // Actualizar botones
-    startButton.style.display =
-        GameState.gameStarted ? "none" : "inline-block";
-
-    restartButton.style.display =
-        (GameState.gameOver || GameState.gameWon)
-            ? "inline-block"
-            : "none";
-
-    // Actualizar mensajes
     if (GameState.gameOver) {
+        showEndScreen(false);
+    }
 
-        gameMessage.textContent =
-            "Game Over! You have lost all your lives. Try again!";
-
-    } else if (GameState.gameWon) {
-
-        gameMessage.textContent =
-            "Congratulations! You completed all three missions!";
-
+    if (GameState.gameWon) {
+        showEndScreen(true);
     }
 }
 
 
 // =========================================
-// 3. INICIAR EL JUEGO
+// START GAME
 // =========================================
 
 function startNewGame() {
@@ -120,103 +124,201 @@ function startNewGame() {
     GameState.startGame();
 
     gameMessage.textContent =
-        "Welcome, Guardian! Your EcoQuest adventure begins!";
+        "Welcome, Guardian! Your adventure begins!";
+
+    welcomeScreen.hidden = true;
+    endScreen.hidden = true;
+    gameStatus.hidden = false;
+
+    showScreen(missionsScreen);
+    updateGameInterface();
+}
+
+
+// =========================================
+// OPEN A MISSION
+// =========================================
+
+function openMission(missionNumber) {
+
+    if (!GameState.isMissionUnlocked(missionNumber)) return;
+
+    challengeContainer.innerHTML = "";
+
+    showScreen(challengeScreen);
+
+    if (missionNumber === 1) {
+        OrganismChallenge.render(challengeContainer);
+    }
+
+    if (missionNumber === 2) {
+        FoodChainChallenge.render(challengeContainer);
+    }
+
+    if (missionNumber === 3) {
+        EcosystemChallenge.render(challengeContainer);
+    }
+}
+
+
+// =========================================
+// BACK TO MISSION DASHBOARD
+// =========================================
+
+function showDashboard() {
+
+    if (GameState.gameOver || GameState.gameWon) return;
+
+    challengeContainer.innerHTML = "";
+
+    showScreen(missionsScreen);
+
+    gameMessage.textContent = "Choose your next mission, Guardian!";
 
     updateGameInterface();
 }
 
 
 // =========================================
-// 4. RESPUESTA CORRECTA
+// CORRECT ANSWER
 // =========================================
 
 function correctAnswer() {
 
+    if (!GameState.gameStarted || GameState.gameOver) return false;
+
     GameState.addPoints();
 
-    gameMessage.textContent =
-        "Correct answer! You earned 100 points!";
-
     updateGameInterface();
+
+    return true;
 }
 
 
 // =========================================
-// 5. RESPUESTA INCORRECTA
+// INCORRECT ANSWER
 // =========================================
 
 function incorrectAnswer() {
 
+    if (!GameState.gameStarted || GameState.gameOver) return false;
+
     GameState.loseLife();
 
-    if (GameState.gameOver) {
-
-        gameMessage.textContent =
-            "Game Over! You have lost all your lives.";
-
-    } else {
-
-        gameMessage.textContent =
-            "Not quite right! You lost one life. Keep trying!";
-
-    }
-
     updateGameInterface();
+
+    return !GameState.gameOver;
 }
 
 
 // =========================================
-// 6. COMPLETAR LA MISIÓN ACTUAL
+// COMPLETE CURRENT MISSION
 // =========================================
 
 function finishCurrentMission() {
 
     const completed = GameState.completeMission();
 
-    if (!completed) return;
-
-    if (GameState.gameWon) {
-
-        gameMessage.textContent =
-            "Amazing! You are a true Guardian of the Ecosystem!";
-
-    } else {
-
-        gameMessage.textContent =
-            "Mission completed! You earned 200 bonus points. Next mission unlocked!";
-
-    }
+    if (!completed) return false;
 
     updateGameInterface();
+
+    if (GameState.gameWon) {
+        showEndScreen(true);
+    } else {
+        challengeContainer.innerHTML = `
+            <div class="challenge-card mission-complete">
+                <div class="end-icon">🎉</div>
+                <h2>Mission Completed!</h2>
+                <p>You earned 200 bonus points!</p>
+                <p>Great work, Guardian. Your next mission is unlocked.</p>
+                <button id="dashboard-button" class="primary-button">
+                    Continue to Missions
+                </button>
+            </div>
+        `;
+
+        document.getElementById("dashboard-button")
+            .addEventListener("click", showDashboard);
+    }
+
+    return true;
 }
 
 
 // =========================================
-// 7. REINICIAR EL JUEGO
+// END GAME
+// =========================================
+
+function showEndScreen(won) {
+
+    showScreen(endScreen);
+
+    document.getElementById("end-icon").textContent =
+        won ? "🏆" : "💚";
+
+    document.getElementById("end-title").textContent =
+        won ? "Congratulations, Guardian!" : "Game Over!";
+
+    document.getElementById("end-description").textContent =
+        won
+            ? "You completed all three missions and helped protect the ecosystem!"
+            : "You have lost all your lives. You can try the adventure again!";
+
+    document.getElementById("final-score").textContent =
+        GameState.score;
+
+    restartButton.hidden = false;
+}
+
+
+// =========================================
+// RESTART GAME
 // =========================================
 
 function restartGame() {
 
     GameState.restartGame();
 
+    challengeContainer.innerHTML = "";
+
+    gameStatus.hidden = false;
+    restartButton.hidden = false;
+
     gameMessage.textContent =
-        "New game started! Good luck, Guardian!";
+        "A new adventure begins! Good luck!";
+
+    showScreen(missionsScreen);
 
     updateGameInterface();
 }
 
 
 // =========================================
-// 8. CONFIGURAR LOS EVENTOS
+// BUTTON EVENTS
 // =========================================
 
 startButton.addEventListener("click", startNewGame);
 
 restartButton.addEventListener("click", restartGame);
 
+playAgainButton.addEventListener("click", restartGame);
+
+backButton.addEventListener("click", showDashboard);
+
+document.querySelectorAll(".mission-button").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const missionNumber = Number(button.dataset.mission);
+
+        openMission(missionNumber);
+    });
+});
+
 
 // =========================================
-// 9. EXPONER FUNCIONES PARA LAS MISIONES
+// PUBLIC GAME FUNCTIONS
 // =========================================
 
 window.EcoQuest = {
@@ -224,12 +326,19 @@ window.EcoQuest = {
     incorrectAnswer,
     finishCurrentMission,
     restartGame,
+    showDashboard,
+    openMission,
     updateGameInterface
 };
 
 
 // =========================================
-// 10. INICIALIZAR LA INTERFAZ
+// INITIAL SCREEN
 // =========================================
 
-updateGameInterface();
+welcomeScreen.hidden = false;
+gameStatus.hidden = true;
+missionsScreen.hidden = true;
+challengeScreen.hidden = true;
+endScreen.hidden = true;
+restartButton.hidden = true;
