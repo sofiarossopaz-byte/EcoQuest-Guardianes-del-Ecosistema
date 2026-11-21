@@ -548,3 +548,39 @@ footer {
         gap: 10px;
     }
 }
+
+/* Player Feedback Section */
+.feedback-section {
+    text-align: center;
+    padding: 35px 20px;
+    margin: 40px auto 20px;
+    max-width: 800px;
+    background-color: #e8f5e9;
+    border-radius: 16px;
+}
+
+.feedback-section h2 {
+    color: #245c38;
+    margin-bottom: 12px;
+}
+
+.feedback-section p {
+    color: #456b50;
+    margin-bottom: 22px;
+    line-height: 1.6;
+}
+
+.feedback-link {
+    display: inline-block;
+    background-color: #2e7d32;
+    color: white;
+    text-decoration: none;
+    padding: 13px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.feedback-link:hover {
+    background-color: #1b5e20;
+}
